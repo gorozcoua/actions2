@@ -44,3 +44,14 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           MERGE_LABELS: ""
+  close_pull_request:
+    name: Cerrar Pull Request
+    needs: job1
+    runs-on: ubuntu-latest
+    steps:
+      - name: Close Pull Request
+        uses: peter-evans/close-pull-request@v4 # Acción para cerrar PR
+        with:
+          comment: 'Este pull request ha sido cerrado automáticamente después de pasar las pruebas.'
+        env:
+            GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
