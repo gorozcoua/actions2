@@ -44,4 +44,4 @@ jobs:
       runs-on: ubuntu-latest
       steps:
       - name: Imprimir mensaje de salida
-        run: echo ${{ needs.job1.outputs.salida }}"
+        run: echo ${{ needs.job1.outputs.salida }}
