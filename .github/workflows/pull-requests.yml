@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: automerge
-        uses: pascalgn/automerge-action@v0.15.3 # Usa la última versión estable
+        uses: pascalgn/automerge-action@v0.15.3
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           MERGE_LABELS: ""
@@ -51,7 +51,7 @@ jobs:
     steps:
       - name: Cerrar PR vía API de GitHub
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
           pr_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
           curl -X PATCH \
