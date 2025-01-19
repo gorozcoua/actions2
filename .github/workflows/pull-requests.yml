@@ -21,7 +21,7 @@ jobs:
     - name: Configuración de entorno de python
       uses: actions/setup-python@v2
       with:
-          python-version: '3.7'
+          python-version: '3.8'
     - name: Instalación de librerías y dependencias
       run: |
         python -m pip install --upgrade pip
@@ -44,3 +44,18 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           MERGE_LABELS: ""
+  close_pull_request:
+    name: Cerrar Pull Request
+    needs: automerge
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cerrar PR vía API de GitHub
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pr_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+          curl -X PATCH \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/${{ github.repository }}/pulls/$pr_number \
+            -d '{"state":"closed"}'
