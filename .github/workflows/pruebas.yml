@@ -7,7 +7,7 @@ jobs:
     name: Pruebas
     runs-on: ubuntu-latest
     outputs:
-      salida: ${{ steps.imprimir.outputs.respuesta }}
+      salida: ${{ steps.correr-pruebas.outputs.respuesta }}
     steps:
     - name: Checkout de repositorio
       uses: actions/checkout@v2
