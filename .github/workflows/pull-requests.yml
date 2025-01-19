@@ -46,7 +46,7 @@ jobs:
           MERGE_LABELS: ""
   close_pull_request:
     name: Cerrar Pull Request
-    needs: job1
+    needs: automerge
     runs-on: ubuntu-latest
     steps:
       - name: Cerrar PR vía API de GitHub
